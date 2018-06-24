@@ -2,6 +2,7 @@ package com.jianpan.sell.app.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jianpan.sell.app.domain.OrderDetail;
 import com.jianpan.sell.app.enums.OrderStatusEnum;
@@ -15,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+//@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
     /** 订单id. */

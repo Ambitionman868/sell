@@ -25,3 +25,8 @@ server:
 #  file: /var/log/tomcat/sell.log
 #  level:
 #    com.jianpan.sell.app.LoggerTest: debug
+
+
+wechat:
+  mpAppId: wx4e7096883b4d0464
+  mpAppSecret: ff4067fbb9f20e16b5edbf5bb253ed0c

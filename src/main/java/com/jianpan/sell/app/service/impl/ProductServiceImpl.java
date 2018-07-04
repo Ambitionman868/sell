@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
             productInfo.setProductStock(productInfo.getProductStock() + cartDTO.getProductQuantity());
-            productInfoRepository.save(productInfo) ;
+            productInfoRepository.save(productInfo);
         });
 
     }
@@ -76,11 +76,29 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductInfo onSale(String productId) {
-        return null;
+        ProductInfo productInfo = productInfoRepository.findOne(productId);
+        if (productInfo == null) {
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+
+        if (productInfo.getProductStatusEnum() == ProductStatusEnum.UP) {
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        return productInfoRepository.save(productInfo);
     }
 
     @Override
     public ProductInfo offSale(String productId) {
-        return null;
-    }
+        ProductInfo productInfo = productInfoRepository.findOne(productId);
+        if (productInfo == null) {
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if (productInfo.getProductStatusEnum() == ProductStatusEnum.DOWN) {
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+
+        //更新
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        return productInfoRepository.save(productInfo);    }
 }
